@@ -7,5 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by Sorravit on 3/11/2559.
  */
 @Transactional
-public interface  UserDAO extends CrudRepository<UserVO,Integer>{
+public interface PostDAO extends CrudRepository<PostVO,Integer> {
+
 }

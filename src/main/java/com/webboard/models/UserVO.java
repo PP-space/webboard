@@ -25,7 +25,7 @@ public class UserVO {
     public UserVO() {
     }
 
-    public UserVO(String email, String username, String password) {
+    public UserVO( String username, String password, String email) {
         this.email = email;
         this.username = username;
         this.password = password;
