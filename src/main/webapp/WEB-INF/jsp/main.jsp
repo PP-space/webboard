@@ -23,6 +23,11 @@
     <p class="bottomPagging"></p>
 </div>
 <script>
+    var options = {
+        weekday: "long", year: "numeric", month: "short",
+        day: "numeric", hour: "2-digit", minute: "2-digit"
+    };
+
     function genModal(id,title,data){
         modal='<div id="modal'+id+'" class="modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button> <h4 class="modal-title">'+title+'</h4></div><div class="modal-body"><p>'+data+'</p></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div>';
         return modal;
@@ -35,16 +40,28 @@
             success: function(result){
                 $(".list-group").html("")
                 for(i in result){
-                    $(".list-group").append("<a class=\'list-group-item\'  data-toggle=\'modal\' data-target=\'#modal"+result[i].idPost+"\'>"+
+                    $(".list-group").append("<a class=\'list-group-item\'  data-toggle=\'modal\' data-target=\'#modal"+result[i].idPost+"\' onclick=\'updateViewCount("+result[i].idPost+")\'>"+
                             "Post No."+result[i].idPost+
                             " Title: "+result[i].title +
                             " by: "+result[i].userName +
-                            " Posted on: "+new Date(result[i].postDate) +
+                            " Posted on: "+new Date(result[i].postDate).toLocaleTimeString("en-us", options) +
                             "Viewed : "+ result[i].viewCount+"</a>"+genModal(result[i].idPost,result[i].title,result[i].data))
                 }
+                $("[id*='modal']").on("hidden.bs.modal", function () {
+                    getPost(blockNo);
+                });
             }
-        });}
-
+        });
+    }
+    function updateViewCount(id) {
+        $.ajax({
+            type: 'POST',
+            url: "updateViewCount",
+            data:"id="+id,
+            success: function(result){
+            }
+        });
+    }
     function genPagging(page){
         $.ajax({
             type: 'POST',
@@ -73,6 +90,7 @@
     }
     genPagging(1);
     getPost(0);
+
 </script>
 </body>
 </html>
