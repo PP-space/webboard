@@ -1,5 +1,7 @@
 package com.webboard.front;
 
+import com.webboard.models.PostDAO;
+import com.webboard.models.PostVO;
 import com.webboard.models.UserVO;
 import com.webboard.models.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class WebboardController {
     private static final int KEY_LENGTH = 256;
     @Autowired
     UserDAO userDAO;
+    @Autowired
+    PostDAO postDAO;
 
     @RequestMapping(value = "/")
     public String main(ModelMap modelMap){
@@ -41,6 +45,18 @@ public class WebboardController {
         modelMap.addAttribute("user",user);
         System.out.print(user);
         return "main";
+    }
+    @ResponseBody
+    @RequestMapping(value = "/post")
+    public String post(HttpServletRequest request){
+        try{
+            PostVO postVO = new PostVO(Integer.parseInt(request.getParameter("userId")),request.getParameter("userName"),request.getParameter("title"),request.getParameter("data"),new Date(),0);
+            postDAO.save(postVO);
+        }catch (Exception e){
+            e.printStackTrace();
+            return "false";
+        }
+        return "Success";
     }
     @ResponseBody
     @RequestMapping(value = "/saveMember")

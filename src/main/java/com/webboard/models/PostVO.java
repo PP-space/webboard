@@ -15,13 +15,16 @@ public class PostVO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long idPost;
-//    @Column(nullable = false)
-//    private UserVO user;
+    @Column(nullable = false)
+    private int userId;
+
+    @NotNull
+    @Column(nullable = false)
+    private String userName;
     @NotNull
     @Column(nullable = false)
     private String title;
-    @NotNull
-    @Column(nullable = false)
+
     private String data;
     @NotNull
     @Column(nullable = false)
@@ -29,6 +32,15 @@ public class PostVO implements Serializable {
     @NotNull
     @Column(nullable = false)
     private int viewCount;
+
+    public PostVO(int userId, String userName, String title, String data, Date postDate, int viewCount) {
+        this.userId = userId;
+        this.userName = userName;
+        this.title = title;
+        this.data = data;
+        this.postDate = postDate;
+        this.viewCount = viewCount;
+    }
 
     public long getIdPost() {
         return idPost;
