@@ -5,12 +5,14 @@ import com.webboard.models.PostVO;
 import com.webboard.models.UserDAO;
 import com.webboard.models.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Sorravit on 4/11/2559.
@@ -21,7 +23,25 @@ public class WebboardRestController {
     UserDAO userDAO;
     @Autowired
     PostDAO postDAO;
-
+    @RequestMapping(value = "/getPost")
+    public List<PostVO> getPost(HttpServletRequest request){
+        List<PostVO> postVOList = postDAO.findInIdRange(10,20);
+        return postVOList;
+    }
+    @RequestMapping(value = "/getPostCount")
+    public long getPostCount(HttpServletRequest request){
+        return postDAO.count();
+    }
+    @RequestMapping(value = "/updateViewCount")
+    public String updateViewCount(HttpServletRequest request){
+        try{
+            postDAO.updateViewCount(Integer.parseInt(request.getParameter("id")));
+        }catch(Exception e){
+            e.printStackTrace();
+            return "Fail";
+        }
+        return "Success";
+    }
     @RequestMapping(value = "/post")
     public String post(HttpServletRequest request){
         try{
