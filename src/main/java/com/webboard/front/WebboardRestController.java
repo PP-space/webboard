@@ -27,8 +27,7 @@ public class WebboardRestController {
     public List<PostVO> getPost(HttpServletRequest request){
         int pageSize=10;
         int block = Integer.parseInt(request.getParameter("blockNo"));
-        List<PostVO> postVOList = postDAO.findInIdRange(pageSize*block,pageSize*(block+1));
-        return postVOList;
+        return postDAO.findInIdRange(pageSize*block,pageSize*(block+1));
     }
     @RequestMapping(value = "/getPostCount")
     public long getPostCount(){
@@ -46,12 +45,20 @@ public class WebboardRestController {
     }
     @RequestMapping(value = "/post")
     public String post(HttpServletRequest request){
-        try{
-            PostVO postVO = new PostVO(Integer.parseInt(request.getParameter("userId")),request.getParameter("userName"),request.getParameter("title"),request.getParameter("data"),new Date(),0);
-            postDAO.save(postVO);
+        try {
+            UserVO user = userDAO.findOne(Integer.parseInt(request.getParameter("userId")));
+            if(user.getPassword().equals(request.getParameter("password"))){
+                PostVO postVO = new PostVO(Integer.parseInt(request.getParameter("userId")),request.getParameter("userName"),request.getParameter("title"),request.getParameter("data"),new Date(),0);
+                postDAO.save(postVO);
+            }
+            else{
+//                return "Wrong password";
+                return "Wrong user or password";
+            }
         }catch (Exception e){
             e.printStackTrace();
-            return "false";
+//            return "Wrong member id";
+            return "Wrong user or password";
         }
         return "Success";
     }
