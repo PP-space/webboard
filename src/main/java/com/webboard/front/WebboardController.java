@@ -40,16 +40,7 @@ public class WebboardController {
     PostDAO postDAO;
 
     @RequestMapping(value = "/")
-    public String main(ModelMap modelMap){
-
-        PostVO postVO = postDAO.findOne(1);
-        List<PostVO> postVOList = postDAO.findInIdRange(10,20);
-        for( PostVO postVO1 : postVOList){
-            System.out.println(postVO1);
-        }
-        System.out.println(postDAO.count());
-        modelMap.addAttribute("postVO",postVO);
-        System.out.print(postVO);
+    public String main(){
         return "main";
     }
 

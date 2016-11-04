@@ -45,25 +45,28 @@ public class PostVO implements Serializable {
         this.viewCount = viewCount;
     }
 
-    @Override
-    public String toString() {
-        return "PostVO{" +
-                "idPost=" + idPost +
-                ", userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", title='" + title + '\'' +
-                ", data='" + data + '\'' +
-                ", postDate=" + postDate +
-                ", viewCount=" + viewCount +
-                '}';
-    }
-
     public int getIdPost() {
         return idPost;
     }
 
     public void setIdPost(int idPost) {
         this.idPost = idPost;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getTitle() {
@@ -96,5 +99,18 @@ public class PostVO implements Serializable {
 
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
+    }
+
+    @Override
+    public String toString() {
+        return "PostVO{" +
+                "idPost=" + idPost +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", title='" + title + '\'' +
+                ", data='" + data + '\'' +
+                ", postDate=" + postDate +
+                ", viewCount=" + viewCount +
+                '}';
     }
 }

@@ -13,25 +13,66 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://botmonster.com/jquery-bootpag/jquery.bootpag.js"></script>
 </head>
 <body>
-<div class="list-group">
-    <a href="#" class="list-group-item">Display posting number, writer's name, title, date, no. of views</a>
-    <a href="#" class="list-group-item active"><c:out value="${user.id}"/></a>
-    <a href="#" class="list-group-item"><c:out value="${user.email}"/></a>
-    <a href="#" class="list-group-item">Die With Your Boots On</a>
-    <a href="#" class="list-group-item">Fairies Wear Boots</a>
-</div>
 <div class="container">
-    <h2>Pagination</h2>
-    <p>The .pagination class provides pagination links:</p>
-    <ul class="pagination">
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-    </ul>
+    <p class="topPagging"></p>
+    <div class="list-group">
+    </div>
+    <p class="bottomPagging"></p>
 </div>
+<script>
+    function genModal(id,title,data){
+        modal='<div id="modal'+id+'" class="modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button> <h4 class="modal-title">'+title+'</h4></div><div class="modal-body"><p>'+data+'</p></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div>';
+        return modal;
+    }
+    function getPost(blockNo){
+        $.ajax({
+            type: 'POST',
+            url: "getPost",
+            data:"blockNo="+blockNo,
+            success: function(result){
+                $(".list-group").html("")
+                for(i in result){
+                    $(".list-group").append("<a class=\'list-group-item\'  data-toggle=\'modal\' data-target=\'#modal"+result[i].idPost+"\'>"+
+                            "Post No."+result[i].idPost+
+                            " Title: "+result[i].title +
+                            " by: "+result[i].userName +
+                            " Posted on: "+new Date(result[i].postDate) +
+                            "Viewed : "+ result[i].viewCount+"</a>"+genModal(result[i].idPost,result[i].title,result[i].data))
+                }
+            }
+        });}
+
+    function genPagging(page){
+        $.ajax({
+            type: 'POST',
+            url: "getPostCount",
+            success: function(result){
+                $('.topPagging,.bottomPagging').bootpag({
+                    total: Math.ceil(parseInt(result)/10),
+                    page: page,
+                    maxVisible: 5,
+                    leaps: true,
+                    firstLastUse: true,
+                    first: '←',
+                    last: '→',
+                    wrapClass: 'pagination',
+                    activeClass: 'active',
+                    disabledClass: 'disabled',
+                    nextClass: 'next',
+                    prevClass: 'prev',
+                    lastClass: 'last',
+                    firstClass: 'first'
+                }).on("page", function(event, num){
+                    getPost(num-1);
+                });
+            }
+        });
+    }
+    genPagging(1);
+    getPost(0);
+</script>
 </body>
 </html>

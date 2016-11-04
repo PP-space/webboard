@@ -25,11 +25,13 @@ public class WebboardRestController {
     PostDAO postDAO;
     @RequestMapping(value = "/getPost")
     public List<PostVO> getPost(HttpServletRequest request){
-        List<PostVO> postVOList = postDAO.findInIdRange(10,20);
+        int pageSize=10;
+        int block = Integer.parseInt(request.getParameter("blockNo"));
+        List<PostVO> postVOList = postDAO.findInIdRange(pageSize*block,pageSize*(block+1));
         return postVOList;
     }
     @RequestMapping(value = "/getPostCount")
-    public long getPostCount(HttpServletRequest request){
+    public long getPostCount(){
         return postDAO.count();
     }
     @RequestMapping(value = "/updateViewCount")
