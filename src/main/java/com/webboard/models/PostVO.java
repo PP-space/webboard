@@ -14,7 +14,7 @@ public class PostVO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idPost;
+    private int idPost;
     @Column(nullable = false)
     private int userId;
 
@@ -33,6 +33,9 @@ public class PostVO implements Serializable {
     @Column(nullable = false)
     private int viewCount;
 
+    public PostVO() {
+    }
+
     public PostVO(int userId, String userName, String title, String data, Date postDate, int viewCount) {
         this.userId = userId;
         this.userName = userName;
@@ -42,11 +45,24 @@ public class PostVO implements Serializable {
         this.viewCount = viewCount;
     }
 
-    public long getIdPost() {
+    @Override
+    public String toString() {
+        return "PostVO{" +
+                "idPost=" + idPost +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", title='" + title + '\'' +
+                ", data='" + data + '\'' +
+                ", postDate=" + postDate +
+                ", viewCount=" + viewCount +
+                '}';
+    }
+
+    public int getIdPost() {
         return idPost;
     }
 
-    public void setIdPost(long idPost) {
+    public void setIdPost(int idPost) {
         this.idPost = idPost;
     }
 
