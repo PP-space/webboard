@@ -20,14 +20,14 @@ public class ReplyVO {
 
     @NotNull
     @Column(nullable = false)
-    private String userName;
+    private String message;
 
     public ReplyVO() {
     }
 
-    public ReplyVO(int postId, String userName) {
+    public ReplyVO(int postId, String message) {
         this.postId = postId;
-        this.userName = userName;
+        this.message = message;
     }
 
     public int getIdReply() {
@@ -46,12 +46,12 @@ public class ReplyVO {
         this.postId = postId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getmessage() {
+        return message;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setmessage(String message) {
+        this.message = message;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ReplyVO {
         return "ReplyVO{" +
                 "idReply=" + idReply +
                 ", postId=" + postId +
-                ", userName='" + userName + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }
