@@ -79,6 +79,24 @@ public class WebboardRestController {
         }
         return "Success";
     }
+
+    @RequestMapping(value = "/editPost")
+    public String editPost(HttpServletRequest request){
+        try {
+            PostVO post = postDAO.findOne(Integer.parseInt(request.getParameter("id")));
+            UserVO user = userDAO.findOne(post.getUserId());
+            if(user.getPassword().equals(request.getParameter("password"))){
+                postDAO.updatePost(Integer.parseInt(request.getParameter("id")),request.getParameter("data"));
+            }
+            else{
+                return "Wrong password";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return "Something wrong";
+        }
+        return "Success";
+    }
     @RequestMapping(value = "/saveMember")
     public String saveMember(HttpServletRequest request){
         try {

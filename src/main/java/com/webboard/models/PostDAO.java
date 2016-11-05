@@ -20,7 +20,10 @@ public interface PostDAO extends CrudRepository<PostVO,Integer> {
     @Query(value = "select p from PostVO p where p.idPost between :start AND :end ")
     List<PostVO> findInIdRange(@Param("start") int start, @Param("end") int end);
     @Modifying
-    @Query(value = "update PostVO p set view_count = view_count +1 where  id_post = :id")
+    @Query(value = "update PostVO p set p.viewCount = p.viewCount +1 where  p.idPost = :id")
     int updateViewCount(@Param("id") int id);
+    @Modifying
+    @Query(value = "update PostVO p set p.data = :data where  p.idPost = :id")
+    int updatePost(@Param("id") int id, @Param("data") String data);
 
 }
