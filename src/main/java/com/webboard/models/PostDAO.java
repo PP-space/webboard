@@ -18,13 +18,7 @@ import java.util.List;
 @Transactional
 public interface PostDAO extends CrudRepository<PostVO,Integer> {
     @Query(value = "select p from PostVO p where p.idPost between :start AND :end ")
-    List<PostVO> findInIdRange(@Param("start") int start, @Param("end") int end); //{
-//        Query q = session.createQuery("select p from PostVO");
-//        q.setFirstResult(start);
-//        q.setMaxResults(end);
-//        return q.list();
-//    }
-
+    List<PostVO> findInIdRange(@Param("start") int start, @Param("end") int end);
     @Modifying
     @Query(value = "update PostVO p set view_count = view_count +1 where  id_post = :id")
     int updateViewCount(@Param("id") int id);
