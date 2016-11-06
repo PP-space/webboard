@@ -25,6 +25,7 @@ public class PostVO implements Serializable {
     @Column(nullable = false)
     private String title;
 
+    @Column(columnDefinition="varchar(1000)")
     private String data;
     @NotNull
     @Column(nullable = false)
