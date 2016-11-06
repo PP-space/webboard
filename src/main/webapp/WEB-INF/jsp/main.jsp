@@ -93,7 +93,7 @@
             data:$(name).serialize(),
             success: function(result){
                 alert(result);
-                $(modal).modal('toggle');
+                getReply(id);
             }
         })
     }
