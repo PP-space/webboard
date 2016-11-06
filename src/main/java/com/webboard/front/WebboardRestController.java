@@ -40,7 +40,7 @@ public class WebboardRestController {
     public List<PostVO> getPost(HttpServletRequest request){
         int pageSize=10;
         int block = Integer.parseInt(request.getParameter("blockNo"));
-        return postDAO.findInIdRange(pageSize*block,pageSize*(block+1));
+        return postDAO.findInIdRange(pageSize*block);
     }
     @RequestMapping(value = "/getPostCount")
     public long getPostCount(){

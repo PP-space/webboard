@@ -19,7 +19,7 @@ import java.util.List;
 @Transactional
 public interface PostDAO extends CrudRepository<PostVO,Integer> {
 //    @Query(value = "select p from PostVO p where p.id_post between :start AND :end ")
-    default List<PostVO> findInIdRange(@Param("start") int start, @Param("end") int end){
+    default List<PostVO> findInIdRange(@Param("start") int start){
         Configuration c = new Configuration();
         c.configure("/hibernate.cfg.xml");
         SessionFactory sf = c.buildSessionFactory();
