@@ -47,6 +47,7 @@
         return modal;
     }
     function getPost(blockNo){
+        if (blockNo == "current" ){blockNo = $(".active ")[0].attributes[0].value-1}
         $.ajax({
             type: 'POST',
             url: "getPost",
@@ -62,7 +63,8 @@
                             "Viewed : "+ result[i].view_count+"</a>"+genModal(result[i].id_post,result[i].title,result[i].data))
                 }
                 $("[id*='modal']").on("hidden.bs.modal", function () {
-                    getPost(blockNo);
+                    genPagging("current");
+                    getPost("current");
                 });
                 $("[id*='modal']").on("show.bs.modal", function (e) {
                     getReply(e.target.id.substring(5));
@@ -133,6 +135,8 @@
         })
     }
     function genPagging(page){
+
+        if(page=="current"){ page = $(".active ")[0].attributes[0].value}
         $.ajax({
             type: 'POST',
             url: "getPostCount",
