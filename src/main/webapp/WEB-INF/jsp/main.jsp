@@ -94,7 +94,9 @@
             url: "postComment",
             data:$(name).serialize(),
             success: function(result){
-                alert(result);
+                if(result!="Success"){
+                    alert(result);
+                }
                 getReply(id);
             }
         })
