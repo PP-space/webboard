@@ -35,6 +35,7 @@ public class WebboardRestController {
     public List<ReplyVO> getComment(HttpServletRequest request){
         return replyDAO.findReplyByPost(Integer.parseInt(request.getParameter("id")));
     }
+
     @RequestMapping(value = "/getPost")
     public List<PostVO> getPost(HttpServletRequest request){
         int pageSize=10;
@@ -81,6 +82,7 @@ public class WebboardRestController {
             UserVO user = userDAO.findOne(post.getUser_id());
             if(user.getPassword().equals(request.getParameter("password"))){
                 postDAO.delete(Integer.parseInt(request.getParameter("id")));
+                replyDAO.deleteAllReplyToPostId(Integer.parseInt(request.getParameter("id")));
             }
             else{
                 return "Wrong password";

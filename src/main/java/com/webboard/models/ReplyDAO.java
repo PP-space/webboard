@@ -1,5 +1,6 @@
 package com.webboard.models;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +15,8 @@ import java.util.List;
 public interface ReplyDAO extends CrudRepository<ReplyVO,Integer> {
     @Query(value = "select r from ReplyVO r where r.postId = :postId ")
     List<ReplyVO> findReplyByPost(@Param("postId") int postId);
+    @Modifying
+    @Transactional
+    @Query("delete from ReplyVO r where r.postId = :postId ")
+    void deleteAllReplyToPostId(@Param("postId") int postId);
 }
