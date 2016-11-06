@@ -2,9 +2,7 @@ package com.webboard.front;
 
 import com.webboard.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,7 +78,7 @@ public class WebboardRestController {
     public String deletePost(HttpServletRequest request){
         try {
             PostVO post = postDAO.findOne(Integer.parseInt(request.getParameter("id")));
-            UserVO user = userDAO.findOne(post.getUserId());
+            UserVO user = userDAO.findOne(post.getUser_id());
             if(user.getPassword().equals(request.getParameter("password"))){
                 postDAO.delete(Integer.parseInt(request.getParameter("id")));
             }
@@ -98,7 +96,7 @@ public class WebboardRestController {
     public String editPost(HttpServletRequest request){
         try {
             PostVO post = postDAO.findOne(Integer.parseInt(request.getParameter("id")));
-            UserVO user = userDAO.findOne(post.getUserId());
+            UserVO user = userDAO.findOne(post.getUser_id());
             if(user.getPassword().equals(request.getParameter("password"))){
                 postDAO.updatePost(Integer.parseInt(request.getParameter("id")),request.getParameter("data"));
             }

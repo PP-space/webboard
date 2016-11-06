@@ -54,12 +54,12 @@
             success: function(result){
                 $("#post").html("");
                 for(i in result){
-                    $("#post").append("<a class=\'list-group-item\'  data-toggle=\'modal\' data-target=\'#modal"+result[i].idPost+"\' onclick=\'updateViewCount("+result[i].idPost+")\'>"+
-                            "Post No."+result[i].idPost+
+                    $("#post").append("<a class=\'list-group-item\'  data-toggle=\'modal\' data-target=\'#modal"+result[i].id_post+"\' onclick=\'updateViewCount("+result[i].id_post+")\'>"+
+                            "Post No."+result[i].id_post+
                             " Title: "+result[i].title +
-                            " by: "+result[i].userName +
-                            " Posted on: "+new Date(result[i].postDate).toLocaleTimeString("en-us", options) +
-                            "Viewed : "+ result[i].viewCount+"</a>"+genModal(result[i].idPost,result[i].title,result[i].data))
+                            " by: "+result[i].user_name +
+                            " Posted on: "+new Date(result[i].post_date).toLocaleTimeString("en-us", options) +
+                            "Viewed : "+ result[i].view_count+"</a>"+genModal(result[i].id_post,result[i].title,result[i].data))
                 }
                 $("[id*='modal']").on("hidden.bs.modal", function () {
                     getPost(blockNo);

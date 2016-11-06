@@ -14,13 +14,13 @@ public class PostVO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int idPost;
+    private int id_post;
     @Column(nullable = false)
-    private int userId;
+    private int user_id;
 
     @NotNull
     @Column(nullable = false)
-    private String userName;
+    private String user_name;
     @NotNull
     @Column(nullable = false)
     private String title;
@@ -29,45 +29,45 @@ public class PostVO implements Serializable {
     private String data;
     @NotNull
     @Column(nullable = false)
-    private Date postDate;
+    private Date post_date;
     @NotNull
     @Column(nullable = false)
-    private int viewCount;
+    private int view_count;
 
     public PostVO() {
     }
 
-    public PostVO(int userId, String userName, String title, String data, Date postDate, int viewCount) {
-        this.userId = userId;
-        this.userName = userName;
+    public PostVO(int user_id, String user_name, String title, String data, Date post_date, int view_count) {
+        this.user_id = user_id;
+        this.user_name = user_name;
         this.title = title;
         this.data = data;
-        this.postDate = postDate;
-        this.viewCount = viewCount;
+        this.post_date = post_date;
+        this.view_count = view_count;
     }
 
-    public int getIdPost() {
-        return idPost;
+    public int getId_post() {
+        return id_post;
     }
 
-    public void setIdPost(int idPost) {
-        this.idPost = idPost;
+    public void setId_post(int id_post) {
+        this.id_post = id_post;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser_id(int userId) {
+        this.user_id = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     public String getTitle() {
@@ -86,32 +86,32 @@ public class PostVO implements Serializable {
         this.data = data;
     }
 
-    public Date getPostDate() {
-        return postDate;
+    public Date getPost_date() {
+        return post_date;
     }
 
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
+    public void setPost_date(Date post_date) {
+        this.post_date = post_date;
     }
 
-    public int getViewCount() {
-        return viewCount;
+    public int getView_count() {
+        return view_count;
     }
 
-    public void setViewCount(int viewCount) {
-        this.viewCount = viewCount;
+    public void setView_count(int view_count) {
+        this.view_count = view_count;
     }
 
     @Override
     public String toString() {
         return "PostVO{" +
-                "idPost=" + idPost +
-                ", userId=" + userId +
-                ", userName='" + userName + '\'' +
+                "id_post=" + id_post +
+                ", userId=" + user_id +
+                ", user_name='" + user_name + '\'' +
                 ", title='" + title + '\'' +
                 ", data='" + data + '\'' +
-                ", postDate=" + postDate +
-                ", viewCount=" + viewCount +
+                ", post_date=" + post_date +
+                ", view_count=" + view_count +
                 '}';
     }
 }
